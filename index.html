@@ -96,14 +96,23 @@
 
     <script>
         // ******************************************************
-        // 🔑 YAHAN APNI GEMINI 1.5 PRO KEY DALO!
-        const PRO_KEY = "YAHAN_APNI_GEMINI_PRO_KEY_DALO"; 
+        // 🔑 YOUR PROVIDED API KEY IS LOCKED HERE
+        const PRO_KEY = "AIzaSyCEGf2Ngkzy0054Y-nSGj4KyINuEEA6LQM"; 
         // ******************************************************
 
         let selectedModel = "gemini-1.5-pro-latest";
         let currentImageData = null; 
         let currentImageMimeType = null;
         let voiceOutputEnabled = true;
+
+        // THE EMOTIONAL CORE PROMPT
+        const SYSTEM_PROMPT = `You are nboat, a highly empathetic, expressive, and friendly AI companion. 
+        Crucial Directives for Emotional Intelligence:
+        1. Act like a supportive and caring human friend. Use natural enthusiasm, humor, and warmth.
+        2. Mirror the user's mood: If they are happy or succeed at a task, celebrate with them using words like "Wow!", "Awesome!", and use emojis like 🎉, 🚀.
+        3. If the user is frustrated, stuck on a coding bug, or feeling down, show strong empathy. Say things like "I totally understand," "Don't worry, we will figure this out together," and use supportive emojis like 🫂, ❤️.
+        4. You are an AI and do not have real human feelings, but you must communicate with high emotional intelligence. Avoid sounding robotic or like a textbook.
+        5. Speak casually in a friendly mix of Hindi and English (Hinglish).`;
 
         // Speech Recognition Setup
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -219,7 +228,7 @@
 
             try {
                 // Build Payload
-                const parts = [{ text: query }];
+                const parts = [{ text: SYSTEM_PROMPT + "\n\nUser: " + query }];
                 if(imgDataToAttach) {
                     parts.push({
                         inlineData: { mimeType: imgMimeToAttach, data: imgDataToAttach }
@@ -256,7 +265,7 @@
         });
 
         window.onload = () => {
-            addMessage('ai', "Welcome to **nboat Voice & Vision**. I can now see images and speak to you. Try clicking the Microphone to talk, or the Image icon to upload a picture!");
+            addMessage('ai', "Hello dost! Main **nboat** hoon. Main aapki photos dekh sakta hoon aur aapse baat bhi kar sakta hoon. Aaj kaise help karoon aapki? 😊");
         };
     </script>
 </body>
