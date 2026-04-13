@@ -96,11 +96,10 @@
 
     <script>
         // ******************************************************
-        // 🔑 AAPKI API KEY
-        const PRO_KEY = "AIzaSyB-7E8UDSzIXgeQGzBIA6H2C6DIZdZnRmc"; 
+        // 🔑 AAPKI REAL API KEY YAHAN ADD HO GAYI HAI
+        const PRO_KEY = "AIzaSyAYS1a15Et6Lv_26Chn3AzJ1g8IIZfN46w"; 
         // ******************************************************
 
-        // FIX: Added "-latest" to exactly match Google's server requirements
         let selectedModel = "gemini-1.5-flash-latest"; 
         
         let currentImageData = null; 
@@ -221,7 +220,7 @@
             addMessage('user', query, imgPreviewSrc);
 
             try {
-                const parts = [{ text: SYSTEM_PROMPT + "\n\nUser: " + query }];
+                const parts = [{ text: query }];
                 if(imgDataToAttach) {
                     parts.push({
                         inlineData: { mimeType: imgMimeToAttach, data: imgDataToAttach }
@@ -232,13 +231,16 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
+                        system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
                         contents: [{ role: "user", parts: parts }],
                         generationConfig: { temperature: 0.7, maxOutputTokens: 4096 }
                     })
                 });
 
                 const data = await response.json();
+                
                 if(data.error) throw new Error(data.error.message);
+                if(!data.candidates || !data.candidates[0].content) throw new Error("Safety filters blocked this response or it returned empty.");
 
                 const reply = data.candidates[0].content.parts[0].text;
                 addMessage('ai', reply);
