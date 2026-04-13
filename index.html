@@ -60,10 +60,10 @@
     <header class="header">
         <div class="logo-area">
             <i class="fas fa-atom"></i>
-            <h2>J.A.R.V.I.S. <span class="pro-badge">Mk. IV Flash</span></h2>
+            <h2>J.A.R.V.I.S. <span class="pro-badge">Mk. V</span></h2>
         </div>
         <div id="status" style="font-size: 0.85rem; color: #8892b0; display: flex; align-items: center; gap: 10px;">
-            <span id="modelDisplay"><i class="fas fa-bolt" style="color:var(--primary)"></i> Flash Engine</span>
+            <span id="modelDisplay"><i class="fas fa-bolt" style="color:var(--primary)"></i> Flash-Latest Engine</span>
             <button id="voiceToggleBtn" class="icon-btn" onclick="toggleVoiceOutput()" title="Toggle Voice"><i class="fas fa-volume-up"></i></button>
         </div>
     </header>
@@ -96,12 +96,13 @@
 
     <script>
         // ******************************************************
-        // 🔑 NAYI API KEY WITH FLASH ENGINE
+        // 🔑 AAPKI API KEY
         const PRO_KEY = "AIzaSyB-7E8UDSzIXgeQGzBIA6H2C6DIZdZnRmc"; 
         // ******************************************************
 
-        // FIX: Switched to 1.5-flash which is bulletproof and supports vision
-        let selectedModel = "gemini-1.5-flash"; 
+        // FIX: Added "-latest" to exactly match Google's server requirements
+        let selectedModel = "gemini-1.5-flash-latest"; 
+        
         let currentImageData = null; 
         let currentImageMimeType = null;
         let voiceOutputEnabled = true;
@@ -115,7 +116,7 @@
         5. Be highly capable in programming, physics, and advanced systems, but present the information elegantly.`;
 
         window.onload = () => {
-            addMessage('ai', "Systems online. Good evening, Sir. I am **J.A.R.V.I.S.** All core systems and emotional intelligence modules are fully operational via the Flash Engine. How may I assist you today?");
+            addMessage('ai', "Systems online. Good evening, Sir. I am **J.A.R.V.I.S.** All core systems and emotional intelligence modules are fully operational. How may I assist you today?");
         };
 
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
